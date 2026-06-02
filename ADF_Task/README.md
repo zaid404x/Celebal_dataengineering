@@ -10,7 +10,7 @@ Copy a CSV file from one Azure Blob Storage container to another using Azure Dat
 * Azure Storage Account
 * Azure Blob Storage
 * Azure Data Factory
-
+* Azure IAM
 ## Workflow
 
 1. Create Resource Group
@@ -24,6 +24,7 @@ Copy a CSV file from one Azure Blob Storage container to another using Azure Dat
 9. Add Get Metadata Activity
 10. Add Copy Data Activity
 11. Execute Pipeline
+12. Iam roles assigned 
 
 ## Result
 
