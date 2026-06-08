@@ -1,0 +1,17 @@
+emp_id,name,department,age,salary,region
+1,Zaid,IT,21,50000,North
+2,Harsh,IT,22,60000,North
+3,Deepak,HR,25,45000,South
+4,Riddhi,Sales,23,55000,West
+5,Aman,Finance,28,70000,East
+6,Sara,,24,65000,North
+7,Ali,IT,,52000,South
+8,Rahul,HR,30,,West
+9,Priya,Sales,26,58000,
+10,John,IT,27,62000,North
+10,John,IT,27,62000,North
+11,,Finance,29,75000,East
+12,Meera,HR,31,48000,South
+13,Karan,Sales,22,54000,West
+14,Nisha,IT,24,61000,North
+15,Arjun,Finance,35,80000,East
