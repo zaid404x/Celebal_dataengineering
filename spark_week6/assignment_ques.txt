@@ -1,0 +1,119 @@
+Q1 *Driver is the main component of a spark application which control the execution of tasks and coordinate the whole job execution process 
+   *The cluster manager is responsible for allocating resources across the cluster and managing available nodes
+   *Executors are worker processes which execute the assigned tasks and perform actual data processing on the data partitions
+
+Q2 Spark uses lazy evaluation which means transformations are not executed immediately Instead spark stores all operations and creates an execution plan When an action is triggered spark optimizes the workflow and removes unnecessary operations This help improve performance and reduce processing time on large datasets
+
+Q3
+
+```python
+df = spark.read.csv(
+    "data/source.csv",
+    header=True,
+    inferSchema=True
+)
+```
+
+This command reads the csv file from the specified location the first row is treated as column names and spark automatically detect the data types of columns
+
+Q4 Difference between csv and parquet
+
+| Csv                                                            | Parquet                                                       |
+| -------------------------------------------------------------- | ------------------------------------------------------------- |
+| Csv is a row based file format                                 | Parquet is a columnar file format                             |
+| Csv stores data row by row                                     | Parquet stores data column by column                          |
+| Csv files usually take more storage space                      | Parquet files require less storage because of compression     |
+| Csv does not store schema information efficiently              | Parquet stores schema information with the data               |
+| Csv is slower for analytical queries                           | Parquet is faster for analytical queries                      |
+| Csv reads the complete row even if only few columns are needed | Parquet reads only the required columns                       |
+| Csv does not support predicate pushdown efficiently            | Parquet supports predicate pushdown which improve performance |
+
+Parquet generally provides better performance because spark reads only the required columns and less data is loaded into memory
+
+Q5
+
+```python
+df.filter(df.category == "Electronics") \
+  .select("product_id", "price")
+```
+
+This query filters the rows where category is Electronics and then selects only the product_id and price columns from the dataframe
+
+Q6
+
+```python
+from pyspark.sql.functions import col
+
+df = df.withColumnRenamed(
+    "old_name",
+    "new_name"
+)
+
+df = df.withColumn(
+    "price",
+    col("price").cast("double")
+)
+```
+
+The first statement rename the existing column while the second statement converts the price column from string type into double type for numerical calculations
+
+Q7 Spark maintains a lineage graph also called DAG which keeps track of all transformations applied on the data If a worker node fails spark does not need to reload the complete dataset Instead it recompute only the missing partitions using the lineage information This make spark fault tolerant and reliable
+
+Q8
+
+```python
+df_orders.filter(
+    (df_orders.status == "Completed") &
+    (df_orders.amount > 1000)
+)
+```
+
+This query returns only those rows where the order status is Completed and the amount value is greater than 1000
+
+Q9 Predicate pushdown is an optimization feature available mainly in parquet files It pushes filter conditions to the storage layer so only matching records are read This reduce disk reads memory usage and improve overall processing speed
+
+Q10
+
+```python
+from pyspark.sql.functions import col
+
+df = df.withColumn(
+    "final_price",
+    col("base_price") * 1.18
+)
+```
+
+This code creates a new column named final_price by adding 18 percent tax to the existing base_price value
+
+Q11 Transformations are operations which create a new dataframe and are executed lazily Examples are filter and select Actions are operations which trigger actual execution and return results Examples are show and count Transformations build the execution plan while actions execute it
+
+Q12
+
+```python
+df = spark.read.parquet(
+    "path/to/input"
+)
+
+df.filter(
+    df.user_id.isNotNull()
+).write.mode("overwrite") \
+ .option("header", True) \
+ .csv("path/to/output")
+```
+
+This code loads a parquet file filters out rows where user_id is null and saves the final result as a csv file in the specified output location
+
+Q13 In client mode the driver program runs on the local machine from where the application is submitted In cluster mode the driver runs inside the cluster itself Cluster mode is generally preferred for production environments because it provides better resource management and reliability
+
+Q14
+
+```python
+df.filter(
+    (df.region == "North") |
+    (df.priority == "High")
+)
+```
+
+This query returns rows where either the region is North or the priority value is High If any one condition is true the row will be included in the output
+
+Q15 Show only display a limited number of rows and is safe for inspecting large datasets Collect brings all records from executors to the driver memory which can cause memory overflow when working with multi terabyte datasets Therefore show is much safer and more efficient for data exploration
