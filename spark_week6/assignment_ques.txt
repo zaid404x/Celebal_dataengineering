@@ -1,6 +1,4 @@
-Q1 *Driver is the main component of a spark application which control the execution of tasks and coordinate the whole job execution process 
-   *The cluster manager is responsible for allocating resources across the cluster and managing available nodes
-   *Executors are worker processes which execute the assigned tasks and perform actual data processing on the data partitions
+Q1 Driver is the main component of a spark application which control the execution of tasks and coordinate the whole job execution process The cluster manager is responsible for allocating resources across the cluster and managing available nodes Executors are worker processes which execute the assigned tasks and perform actual data processing on the data partitions
 
 Q2 Spark uses lazy evaluation which means transformations are not executed immediately Instead spark stores all operations and creates an execution plan When an action is triggered spark optimizes the workflow and removes unnecessary operations This help improve performance and reduce processing time on large datasets
 
