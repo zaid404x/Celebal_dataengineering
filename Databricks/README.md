@@ -1,57 +1,51 @@
-# Delta Lake MERGE Implementation using Databricks
+# Week 7 - Delta Lake MERGE Implementation using Databricks
 
-## Objective
+## Overview
 
-Perform incremental data processing using Delta Lake and implement MERGE operations to update existing records and insert new records.
+This project demonstrates the implementation of incremental data processing using Delta Lake in Databricks. The objective was to load a dataset, perform data cleaning, create an incremental dataset, and apply a MERGE operation to efficiently update existing records and insert new records.
 
-## Dataset
+The project highlights how Delta Lake enables reliable data management through ACID transactions and supports modern data engineering workflows by handling incremental updates without reprocessing the entire dataset.
 
-- Dataset: Sample Superstore Dataset
-- Source: Kaggle
+Using the Sample Superstore Dataset, a Delta table was created after performing basic cleaning operations such as removing duplicates and handling missing values. An incremental dataset was then generated to simulate newly arriving data. The Delta Lake MERGE operation was used to perform UPSERT functionality, ensuring that existing records were updated while new records were inserted seamlessly.
 
-## Steps Performed
-
-1. Uploaded dataset to Databricks Volume.
-2. Loaded CSV file using PySpark.
-3. Performed data cleaning:
-   - Removed duplicates
-   - Handled null values
-4. Renamed columns to Delta-compatible format.
-5. Created Delta table (`superstore_master`).
-6. Created incremental dataset.
-7. Modified records to simulate updates.
-8. Applied Delta Lake MERGE operation.
-9. Validated updated records and row counts.
-10. Displayed final merged dataset.
+Finally, the results were validated by verifying updated records and reviewing the final dataset. This implementation provides practical experience with Databricks, Apache Spark, Delta Lake, and incremental data processing techniques commonly used in real-world data engineering projects.
 
 ## Technologies Used
 
 - Databricks
-- Apache Spark
+- Apache Spark (PySpark)
 - Delta Lake
-- PySpark
+- Python
+- GitHub
 
-## MERGE Logic
+## Key Concepts Covered
 
-```python
-deltaTable.alias("target").merge(
-    incremental_df.alias("source"),
-    "target.Row_ID = source.Row_ID"
-).whenMatchedUpdateAll() \
- .whenNotMatchedInsertAll() \
- .execute()
-```
+- Delta Lake
+- ACID Transactions
+- Data Cleaning
+- Incremental Data Processing
+- MERGE (UPSERT) Operations
+- Data Validation
+- Databricks Notebook Management
 
-## Project Structure
+## Learning Outcomes
 
-```text
-week7-delta-lake-merge/
-├── data/
-├── notebooks/
-├── screenshots/
-└── README.md
-```
+Through this project, I gained hands-on experience with:
 
-## Outcome
+- Working with Databricks notebooks and serverless compute
+- Loading and transforming datasets using PySpark
+- Creating and managing Delta tables
+- Implementing MERGE operations for incremental updates
+- Validating data consistency after updates
+- Understanding practical Delta Lake workflows used in modern data engineering environments
 
-Successfully implemented Delta Lake MERGE operation for incremental data processing and validated the updated records.
+## Author
+
+**Zaid Pathan**  
+B.Tech Computer Science Engineering  
+Amity University
+
+## Assignment
+
+**Celebal Technologies – Data Engineering Internship**  
+**Week 7: Delta Lake MERGE Implementation**
